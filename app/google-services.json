@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "51282668111",
+    "firebase_url": "https://testseekeritunes.firebaseio.com",
+    "project_id": "testseekeritunes",
+    "storage_bucket": "testseekeritunes.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:51282668111:android:80317791df08d01861183a",
+        "android_client_info": {
+          "package_name": "com.example.testseekeritunes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "51282668111-pe10jqq96us3k8flr9jkjlgrjq8tafip.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.testseekeritunes",
+            "certificate_hash": "d866ca3648c1d0ae5aa6887e05e5dd74015e7f7e"
+          }
+        },
+        {
+          "client_id": "51282668111-fmmg806o3un1m2sqod8ob7bh08184176.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIWITr1ZlNg3og3-rt2fIVmZjSPQ0rWJg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "51282668111-fmmg806o3un1m2sqod8ob7bh08184176.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
