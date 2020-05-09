@@ -37,10 +37,15 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation deps.kotlin
+    implementation deps.koin
+    implementation deps.koin_viewmodel
     implementation deps.appcompat
     implementation deps.constraintlayout
     implementation deps.core_ktx
+    implementation deps.coroutines_core
+    implementation deps.coroutines_android
     implementation deps.lifecycle_extensions
+    implementation deps.lifecycle_rx
     implementation deps.viewmodel_ktx
     implementation deps.navigation_fragment
     implementation deps.navigation_ui
@@ -49,10 +54,6 @@ dependencies {
     implementation deps.analytics
     implementation deps.crashlytics
     implementation deps.rxbinding
-    implementation deps.interceptor
-    implementation deps.retrofit_adapter
-    implementation deps.retrofit_gson
-    implementation deps.retrofit
     implementation deps.rxandroid
     testImplementation deps.junit
     androidTestImplementation deps.test_ext
