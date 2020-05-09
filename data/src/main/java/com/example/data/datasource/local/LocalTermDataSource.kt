@@ -5,7 +5,7 @@ import com.example.data.datasource.local.db.TestSeekeriTunesDatabase
 import com.example.data.entity.TermEntity
 
 class LocalTermDataSource(private val database: TestSeekeriTunesDatabase) : TermDataSource {
-    override suspend fun saveTerm(termEntity: TermEntity): TermEntity {
+    override suspend fun saveTerm(termEntity: TermEntity) {
         val entity = database.termDao().getByText(termEntity.text)
 
         if (entity.id == termEntity.id) {
@@ -13,8 +13,6 @@ class LocalTermDataSource(private val database: TestSeekeriTunesDatabase) : Term
         } else {
             database.termDao().insert(termEntity)
         }
-
-        return termEntity
     }
 
     override suspend fun getTerms(): List<TermEntity> = database.termDao().getAll()
