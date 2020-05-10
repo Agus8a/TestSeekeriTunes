@@ -1,11 +1,10 @@
 package com.example.data.datasource.local.db.dao
 
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 import com.example.data.entity.ResultEntity
+import com.example.data.util.DEFAULT_LIMIT
 
+@Dao
 interface ResultDao {
     @Insert
     fun insert(resultEntity: ResultEntity)
@@ -22,6 +21,6 @@ interface ResultDao {
     @Query("SELECT * FROM ResultEntity WHERE trackId = :trackId")
     fun getByTrackId(trackId: Long): ResultEntity
 
-    @Query("SELECT * FROM ResultEntity WHERE termId = :termId")
-    fun getByTeem(termId: Long): List<ResultEntity>
+    @Query("SELECT * FROM ResultEntity WHERE termId = :termId LIMIT $DEFAULT_LIMIT")
+    fun getByTerm(termId: Long): List<ResultEntity>
 }

@@ -11,7 +11,6 @@ class BaseStatusObserver<V, T>(
     private val errorCallback: (e: BaseException?) -> Unit,
     private val progressCallback: ((p: Int) -> Unit)
 ) : Observer<BaseResource<T>> {
-
     init {
         observer.addSource(source, this)
     }

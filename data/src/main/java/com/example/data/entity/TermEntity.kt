@@ -8,7 +8,7 @@ import com.example.data.core.BaseEntity
 data class TermEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0L,
-    val text: String = "",
+    var text: String = "",
     val isValid: Boolean = true,
     val resultCount: Int = 0
 ) : BaseEntity()

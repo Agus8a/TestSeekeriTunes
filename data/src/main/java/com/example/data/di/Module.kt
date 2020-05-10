@@ -10,8 +10,11 @@ import com.example.data.datasource.remote.ApiProvider
 import com.example.data.datasource.remote.RemoteSearchDataSource
 import com.example.data.mapper.ResultEntityToModel
 import com.example.data.mapper.ResultModelToEntity
+import com.example.data.mapper.TermEntityToString
 import com.example.data.repository.SearchRepositoryImpl
+import com.example.data.repository.TermRepositoryImpl
 import com.example.domain.repository.SearchRepository
+import com.example.domain.repository.TermRepository
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
@@ -21,10 +24,12 @@ val dataModule = module {
 
     single<SearchDataSource> { RemoteSearchDataSource(get()) }
 
-    single<SearchRepository> { SearchRepositoryImpl(get(), get(), get(), get()) }
+    single<SearchRepository> { SearchRepositoryImpl(get(), get(), get(), get(), get()) }
+    single<TermRepository> { TermRepositoryImpl(get(), get()) }
 
     single { ResultEntityToModel() }
     single { ResultModelToEntity() }
+    single { TermEntityToString() }
 
     single { ApiProvider(androidContext()) }
     single {

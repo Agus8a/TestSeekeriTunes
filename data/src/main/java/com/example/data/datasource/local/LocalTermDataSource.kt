@@ -5,13 +5,15 @@ import com.example.data.datasource.local.db.TestSeekeriTunesDatabase
 import com.example.data.entity.TermEntity
 
 class LocalTermDataSource(private val database: TestSeekeriTunesDatabase) : TermDataSource {
-    override suspend fun saveTerm(termEntity: TermEntity) {
-        val entity = database.termDao().getByText(termEntity.text)
+    override suspend fun saveTerm(term: String): TermEntity {
+        val entity = database.termDao().getByText(term)
 
-        if (entity.id == termEntity.id) {
-            database.termDao().update(termEntity)
+        return if (entity.id == 0L) {
+            entity.text = term
+            database.termDao().insert(entity)
+            database.termDao().getByText(term)
         } else {
-            database.termDao().insert(termEntity)
+            entity
         }
     }
 

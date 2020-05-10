@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 
 abstract class BaseActivity<VS, VM : BaseViewModel<VS>> : AppCompatActivity() {
-    private lateinit var viewModel: VM
+    lateinit var viewModel: VM
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

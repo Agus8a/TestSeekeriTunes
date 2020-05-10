@@ -9,4 +9,5 @@ open class BaseViewStatus {
     var isSuccess = false
     var isComplete = false
     var isLoading = false
+    var errorMessage: String = ""
 }

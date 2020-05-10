@@ -15,8 +15,6 @@ class LocalResultDataSource(private val database: TestSeekeriTunesDatabase) : Re
         }
     }
 
-    override suspend fun getResultsByTerm(term: String): List<ResultEntity> {
-        val termEntity = database.termDao().getByText(term)
-        return database.resultDao().getByTeem(termEntity.id)
-    }
+    override suspend fun getResultsByTerm(idTerm: Long): List<ResultEntity> =
+        database.resultDao().getByTerm(idTerm)
 }
