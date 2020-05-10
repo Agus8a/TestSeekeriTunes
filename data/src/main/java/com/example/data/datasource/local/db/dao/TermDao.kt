@@ -5,10 +5,10 @@ import com.example.data.entity.TermEntity
 
 @Dao
 interface TermDao {
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(termEntity: TermEntity)
 
-    @Update
+    @Update(onConflict = OnConflictStrategy.REPLACE)
     fun update(termEntity: TermEntity)
 
     @Delete

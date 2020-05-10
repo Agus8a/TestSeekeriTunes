@@ -6,13 +6,7 @@ import com.example.data.entity.ResultEntity
 
 class LocalResultDataSource(private val database: TestSeekeriTunesDatabase) : ResultDataSource {
     override suspend fun saveResult(resultEntity: ResultEntity) {
-        val entity = database.resultDao().getByTrackId(resultEntity.trackId)
-
-        if (entity.trackId == resultEntity.trackId) {
-            database.resultDao().update(resultEntity)
-        } else {
-            database.resultDao().insert(resultEntity)
-        }
+        database.resultDao().insert(resultEntity)
     }
 
     override suspend fun getResultsByTerm(idTerm: Long): List<ResultEntity> =

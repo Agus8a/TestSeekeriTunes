@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 fun Context.toast(message: String) {
+    println("ERROR: $message")
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 }
 

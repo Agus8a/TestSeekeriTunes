@@ -6,10 +6,10 @@ import com.example.data.util.DEFAULT_LIMIT
 
 @Dao
 interface ResultDao {
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(resultEntity: ResultEntity)
 
-    @Update
+    @Update(onConflict = OnConflictStrategy.REPLACE)
     fun update(resultEntity: ResultEntity)
 
     @Delete

@@ -65,7 +65,6 @@ class MainActivity : BaseActivity<MainViewStatus, MainViewModel>(), BaseOnSelect
 
     private fun setUpSearchView() {
         val searchEditText = mainSearchCardView.getEditText()
-        searchEditText.imeOptions = EditorInfo.IME_ACTION_SEARCH
         searchEditText.setSelection(searchEditText.text.length)
         searchEditText.setHint(R.string.search)
         searchEditText.setOnEditorActionListener { _, actionId, _ ->
