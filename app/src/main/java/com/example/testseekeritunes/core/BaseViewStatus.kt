@@ -1,0 +1,12 @@
+package com.example.testseekeritunes.core
+
+/**
+ * Base ViewStatus for using in Model-View-ViewModel architecture. Must contain all of the data necessary for the view to draw itself at the current state.
+ */
+open class BaseViewStatus {
+    var isReady = false
+    var isError = false
+    var isSuccess = false
+    var isComplete = false
+    var isLoading = false
+}

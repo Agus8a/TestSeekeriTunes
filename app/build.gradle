@@ -51,6 +51,7 @@ dependencies {
     implementation deps.navigation_ui
     implementation deps.recyclerview
     implementation deps.material
+    implementation deps.cardview
     implementation deps.analytics
     implementation deps.crashlytics
     implementation deps.rxbinding
