@@ -16,8 +16,8 @@ class MainViewModel(
 
     override fun getInitialViewState(): MainViewStatus = MainViewStatus()
 
-    fun initialize() {
-        val mainViewStatus = resourceViewState.value ?: MainViewStatus()
+    fun suggest() {
+        val mainViewStatus = getInitialViewState()
         BaseStatusObserver(resourceViewState, suggestTermsUseCase.execute(null), {
             it?.let {
                 termList = it
@@ -29,25 +29,24 @@ class MainViewModel(
     }
 
     fun search(term: String) {
-        val mainViewStatus = resourceViewState.value ?: MainViewStatus()
+        val mainViewStatus = getInitialViewState()
         BaseStatusObserver(resourceViewState, searchUseCase.execute(term), {
-            it?.let {
-                resultList = it
-                mainViewStatus.isComplete = true
-                mainViewStatus.resultList = resultList
-                resourceViewState.value = mainViewStatus
-            }
+            resultList = it ?: resultList
+            mainViewStatus.isComplete = true
+            mainViewStatus.resultList = resultList
+            resourceViewState.value = mainViewStatus
         }, this::onError, this::onLoading)
     }
 
     private fun onError(exception: BaseException?) {
         exception?.let {
-            val mainViewStatus = resourceViewState.value ?: MainViewStatus()
+            val mainViewStatus = getInitialViewState()
             mainViewStatus.isError = true
             mainViewStatus.errorMessage = it.message ?: ""
             resourceViewState.value = mainViewStatus
         }
     }
 
+    @Suppress("unused")
     private fun onLoading(progress: Int) {}
 }

@@ -2,15 +2,19 @@ package com.example.testseekeritunes.view.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.inputmethod.EditorInfo
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import com.example.domain.model.Result
 import com.example.domain.util.OFFLINE_ERROR_TEXT
 import com.example.testseekeritunes.R
 import com.example.testseekeritunes.core.BaseActivity
 import com.example.testseekeritunes.core.BaseOnSelectItem
 import com.example.testseekeritunes.util.build
-import com.example.testseekeritunes.util.toast
 import com.example.testseekeritunes.view.detail.DetailActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.search_card.*
@@ -25,9 +29,10 @@ class MainActivity : BaseActivity<MainViewStatus, MainViewModel>(), BaseOnSelect
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.initialize()
+        viewModel.suggest()
         resultList.build(this)
         mainAdapter = MainAdapter(this, this)
+        resultList.adapter = mainAdapter
         setUpSearchView()
     }
 
@@ -47,12 +52,15 @@ class MainActivity : BaseActivity<MainViewStatus, MainViewModel>(), BaseOnSelect
                 mainAdapter.setData(viewStatus.resultList)
 
                 if (viewStatus.resultList.isEmpty()) {
-                    toast(OFFLINE_ERROR_TEXT)
+                    Toast.makeText(this@MainActivity, OFFLINE_ERROR_TEXT, Toast.LENGTH_SHORT).show()
                 }
+
+                viewModel.suggest()
             }
 
             viewStatus.isError && viewStatus.errorMessage.isNotEmpty() -> {
-                toast(viewStatus.errorMessage)
+                Toast.makeText(this@MainActivity, viewStatus.errorMessage, Toast.LENGTH_SHORT)
+                    .show()
             }
         }
     }
@@ -64,7 +72,7 @@ class MainActivity : BaseActivity<MainViewStatus, MainViewModel>(), BaseOnSelect
     }
 
     private fun setUpSearchView() {
-        val searchEditText = mainSearchCardView.getEditText()
+        val searchEditText = mainSearchCardView.getInput()
         searchEditText.setSelection(searchEditText.text.length)
         searchEditText.setHint(R.string.search)
         searchEditText.setOnEditorActionListener { _, actionId, _ ->
@@ -74,6 +82,27 @@ class MainActivity : BaseActivity<MainViewStatus, MainViewModel>(), BaseOnSelect
             }
 
             return@setOnEditorActionListener false
+        }
+        searchEditText.addTextChangedListener {
+            object : TextWatcher {
+                override fun afterTextChanged(s: Editable?) {
+                    viewModel.search(s.toString())
+                }
+
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                }
+            }
+        }
+        searchEditText.onItemClickListener = AdapterView.OnItemClickListener { _, _, _, _ ->
+            viewModel.search(searchEditText.text.toString())
         }
     }
 }

@@ -17,16 +17,16 @@ class SearchRepositoryImpl(
 ) : SearchRepository {
     override suspend fun searchByTerm(term: String): List<Result> {
         var results = searchDataSource.searchByTerm(term.replace(" ", "+"))
-        val termEntity = termDataSource.saveTerm(term)
+        termDataSource.saveTerm(term)
 
         if (results.isNotEmpty()) {
             val entities = resultModelToEntity.mapAll(results)
             entities.forEach {
-                it.termId = termEntity.id
+                it.term = term
                 resultDataSource.saveResult(it)
             }
         } else {
-            val entities = resultDataSource.getResultsByTerm(termEntity.id)
+            val entities = resultDataSource.getResultsByTerm(term)
             results = resultEntityToModel.mapAll(entities)
         }
 

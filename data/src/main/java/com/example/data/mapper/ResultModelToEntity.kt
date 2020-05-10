@@ -7,7 +7,7 @@ import com.example.domain.model.Result
 class ResultModelToEntity : BaseMapper<Result, ResultEntity>() {
     override fun map(input: Result): ResultEntity = ResultEntity(
         input.id,
-        input.termId,
+        input.term,
         input.wrapperType,
         input.kind,
         input.artistId,

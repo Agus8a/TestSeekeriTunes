@@ -9,6 +9,6 @@ class LocalResultDataSource(private val database: TestSeekeriTunesDatabase) : Re
         database.resultDao().insert(resultEntity)
     }
 
-    override suspend fun getResultsByTerm(idTerm: Long): List<ResultEntity> =
-        database.resultDao().getByTerm(idTerm)
+    override suspend fun getResultsByTerm(term: String): List<ResultEntity> =
+        database.resultDao().getByTerm(term)
 }

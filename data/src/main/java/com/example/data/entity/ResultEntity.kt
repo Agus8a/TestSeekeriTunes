@@ -8,7 +8,7 @@ import com.example.data.core.BaseEntity
 data class ResultEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0L,
-    var termId: Long = 0L,
+    var term: String = "",
     val wrapperType: String = "",
     val kind: String = "",
     val artistId: Long = 0L,

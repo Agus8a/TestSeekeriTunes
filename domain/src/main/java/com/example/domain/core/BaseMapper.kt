@@ -10,7 +10,11 @@ abstract class BaseMapper<I, O> {
         val list = ArrayList<O>()
         if (input != null) {
             input.takeIf { it.isNotEmpty() }?.forEach {
-                list.add(map(it))
+                val mapped = map(it)
+
+                if (!list.contains(mapped)) {
+                    list.add(mapped)
+                }
             }
         }
 

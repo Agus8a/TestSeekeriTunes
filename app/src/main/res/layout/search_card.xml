@@ -19,14 +19,16 @@
         android:layout_marginTop="@dimen/material_padding_half"
         android:layout_marginEnd="40dp"
         android:layout_marginBottom="@dimen/material_padding_half"
-        android:autofillHints="@string/app_name"
+        android:autofillHints="@string/search"
         android:background="@null"
+        android:completionThreshold="1"
         android:drawableStart="@drawable/ic_search"
         android:drawablePadding="22dp"
         android:imeOptions="actionSearch"
-        android:inputType="text"
+        android:inputType="textFilter"
         android:maxLines="1"
         android:scrollHorizontally="true"
+        android:text=""
         tools:ignore="LabelFor"
         tools:text="@string/search" />
 

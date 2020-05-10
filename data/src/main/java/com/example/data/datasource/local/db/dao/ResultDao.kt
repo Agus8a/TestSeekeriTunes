@@ -21,6 +21,6 @@ interface ResultDao {
     @Query("SELECT * FROM ResultEntity WHERE trackId = :trackId")
     fun getByTrackId(trackId: Long): ResultEntity
 
-    @Query("SELECT * FROM ResultEntity WHERE termId = :termId LIMIT $DEFAULT_LIMIT")
-    fun getByTerm(termId: Long): List<ResultEntity>
+    @Query("SELECT * FROM ResultEntity WHERE term = :term LIMIT $DEFAULT_LIMIT")
+    fun getByTerm(term: String): List<ResultEntity>
 }

@@ -2,15 +2,15 @@ package com.example.domain.model
 
 data class Result(
     val id: Long = 0L,
-    val termId: Long = 0L,
+    var term: String = "",
     val wrapperType: String = "",
     val kind: String = "",
     val artistId: Long = 0L,
     val collectionId: Long = 0L,
     val trackId: Long = 0L,
-    val artistName: String = "",
+    var artistName: String = "",
     val collectionName: String = "",
-    val trackName: String = "",
+    var trackName: String = "",
     val collectionCensoredName: String = "",
     val trackCensoredName: String = "",
     val artistViewUrl: String = "",

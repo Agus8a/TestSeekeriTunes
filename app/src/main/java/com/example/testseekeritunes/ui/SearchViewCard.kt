@@ -3,7 +3,7 @@ package com.example.testseekeritunes.ui
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.widget.EditText
+import android.widget.AutoCompleteTextView
 import android.widget.FrameLayout
 import com.example.testseekeritunes.R
 import kotlinx.android.synthetic.main.search_card.view.*
@@ -30,5 +30,5 @@ class SearchCardView : FrameLayout {
         searchCardClear.setOnClickListener { searchCardEditText.text = null }
     }
 
-    fun getEditText(): EditText = searchCardEditText
+    fun getInput(): AutoCompleteTextView = searchCardEditText
 }
