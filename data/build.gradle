@@ -36,7 +36,6 @@ dependencies {
     implementation deps.coroutines_core
     implementation deps.coroutines_android
     implementation deps.room_runtime
-    implementation deps.room_rxjava2
     kapt deps.room_compiler
     implementation project(':domain')
 }

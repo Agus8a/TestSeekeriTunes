@@ -3,8 +3,6 @@ buildscript {
     getRepositories(repositories)
     dependencies {
         classpath deps.android_gradle
-        classpath deps.crashlytics_gradle
-        classpath deps.google_services
         classpath deps.kotlin_plugin
     }
 }

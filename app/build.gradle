@@ -1,8 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'com.google.gms.google-services'
-apply plugin: 'com.google.firebase.crashlytics'
 
 android {
     compileSdkVersion build_versions.compile_sdk
@@ -47,15 +45,10 @@ dependencies {
     implementation deps.lifecycle_extensions
     implementation deps.lifecycle_rx
     implementation deps.viewmodel_ktx
-    implementation deps.navigation_fragment
-    implementation deps.navigation_ui
     implementation deps.recyclerview
     implementation deps.material
     implementation deps.cardview
-    implementation deps.analytics
-    implementation deps.crashlytics
-    implementation deps.rxbinding
-    implementation deps.rxandroid
+    implementation deps.glide
     testImplementation deps.junit
     androidTestImplementation deps.test_ext
     androidTestImplementation deps.espresso_core
