@@ -1,11 +1,14 @@
 package com.example.testseekeritunes.core
 
+import android.app.ProgressDialog
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 
+@Suppress("DEPRECATION")
 abstract class BaseActivity<VS, VM : BaseViewModel<VS>> : AppCompatActivity() {
     lateinit var viewModel: VM
+    private var progressDialog: ProgressDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,6 +19,20 @@ abstract class BaseActivity<VS, VM : BaseViewModel<VS>> : AppCompatActivity() {
 
     private val viewStatusObserver = Observer<VS> {
         onViewStatusUpdated(it)
+    }
+
+    fun showLoading() {
+        hideLoading()
+        progressDialog = ProgressDialog(this)
+        progressDialog?.setMessage("Cargando...")
+        progressDialog?.show()
+    }
+
+    fun hideLoading() {
+        if (progressDialog != null) {
+            progressDialog!!.dismiss()
+            progressDialog = null
+        }
     }
 
     abstract fun initViewModel(): VM

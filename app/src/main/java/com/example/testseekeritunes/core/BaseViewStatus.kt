@@ -6,7 +6,6 @@ package com.example.testseekeritunes.core
 open class BaseViewStatus {
     var isReady = false
     var isError = false
-    var isSuccess = false
     var isComplete = false
     var isLoading = false
     var errorMessage: String = ""

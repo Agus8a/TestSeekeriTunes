@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.domain.model.Result
 import com.example.testseekeritunes.R
 import com.example.testseekeritunes.core.BaseOnSelectItem
@@ -32,6 +33,7 @@ class MainAdapter(private val context: Context, private val listener: BaseOnSele
         val result = resultList[position]
         holder.trackNameTv.text = result.trackName
         holder.artistNameTv.text = result.artistName
+        Glide.with(context).load(result.artworkUrl60).into(holder.trackImage)
     }
 
     fun setData(newList: List<Result>) {

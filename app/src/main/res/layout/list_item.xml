@@ -7,14 +7,12 @@
     android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_begin="16dp" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineCenter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -42,7 +40,7 @@
         app:layout_constraintGuide_begin="100dp" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/trackImage"
         android:layout_width="72dp"
         android:layout_height="52dp"
         android:contentDescription="@string/app_name"
@@ -57,24 +55,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="66dp" />
+        app:layout_constraintGuide_end="34dp" />
 
     <TextView
         android:id="@+id/trackNameTv"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/search"
         android:textSize="16sp"
+        android:ellipsize="end"
+        android:maxWidth="200dp"
         app:layout_constraintBottom_toTopOf="@+id/guidelineSeparator"
         app:layout_constraintStart_toStartOf="@+id/guidelineImageHorizontal"
         app:layout_constraintTop_toTopOf="@+id/guidelineTop" />
 
     <TextView
         android:id="@+id/artistNameTv"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/search"
         android:textSize="14sp"
+        android:ellipsize="end"
+        android:maxWidth="200dp"
         app:layout_constraintStart_toStartOf="@+id/guidelineImageHorizontal"
         app:layout_constraintTop_toTopOf="@+id/guidelineSeparator" />
 </androidx.constraintlayout.widget.ConstraintLayout>

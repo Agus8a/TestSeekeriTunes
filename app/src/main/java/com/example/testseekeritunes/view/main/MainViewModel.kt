@@ -47,6 +47,9 @@ class MainViewModel(
         }
     }
 
-    @Suppress("unused")
-    private fun onLoading(progress: Int) {}
+    private fun onLoading(progress: Int) {
+        val mainViewStatus = getInitialViewState()
+        mainViewStatus.isLoading = progress > 100
+        resourceViewState.value = mainViewStatus
+    }
 }

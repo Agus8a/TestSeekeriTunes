@@ -2,18 +2,17 @@ package com.example.testseekeritunes.view.main
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.inputmethod.EditorInfo
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.core.widget.addTextChangedListener
 import com.example.domain.model.Result
 import com.example.domain.util.OFFLINE_ERROR_TEXT
 import com.example.testseekeritunes.R
 import com.example.testseekeritunes.core.BaseActivity
 import com.example.testseekeritunes.core.BaseOnSelectItem
+import com.example.testseekeritunes.util.COLLECTION_PREVIEW_KEY
+import com.example.testseekeritunes.util.PREVIEW_KEY
 import com.example.testseekeritunes.util.build
 import com.example.testseekeritunes.view.detail.DetailActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -38,7 +37,12 @@ class MainActivity : BaseActivity<MainViewStatus, MainViewModel>(), BaseOnSelect
 
     override fun onViewStatusUpdated(viewStatus: MainViewStatus) {
         when {
+            viewStatus.isLoading -> {
+                showLoading()
+            }
+
             viewStatus.isReady -> {
+                hideLoading()
                 searchCardEditText.setAdapter(
                     ArrayAdapter(
                         this@MainActivity,
@@ -50,8 +54,9 @@ class MainActivity : BaseActivity<MainViewStatus, MainViewModel>(), BaseOnSelect
 
             viewStatus.isComplete -> {
                 mainAdapter.setData(viewStatus.resultList)
+                hideLoading()
 
-                if (viewStatus.resultList.isEmpty()) {
+                if (mainAdapter.itemCount == 0) {
                     Toast.makeText(this@MainActivity, OFFLINE_ERROR_TEXT, Toast.LENGTH_SHORT).show()
                 }
 
@@ -59,6 +64,7 @@ class MainActivity : BaseActivity<MainViewStatus, MainViewModel>(), BaseOnSelect
             }
 
             viewStatus.isError && viewStatus.errorMessage.isNotEmpty() -> {
+                hideLoading()
                 Toast.makeText(this@MainActivity, viewStatus.errorMessage, Toast.LENGTH_SHORT)
                     .show()
             }
@@ -67,7 +73,8 @@ class MainActivity : BaseActivity<MainViewStatus, MainViewModel>(), BaseOnSelect
 
     override fun onSelectItem(item: Result) {
         val intent = Intent(this@MainActivity, DetailActivity::class.java)
-        intent.putExtra("collectionViewUrl", item.collectionViewUrl)
+        intent.putExtra(COLLECTION_PREVIEW_KEY, item.collectionViewUrl)
+        intent.putExtra(PREVIEW_KEY, item.previewUrl)
         startActivity(intent)
     }
 
@@ -77,31 +84,15 @@ class MainActivity : BaseActivity<MainViewStatus, MainViewModel>(), BaseOnSelect
         searchEditText.setHint(R.string.search)
         searchEditText.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                showLoading()
                 viewModel.search(searchEditText.text.toString())
                 return@setOnEditorActionListener true
             }
 
             return@setOnEditorActionListener false
         }
-        searchEditText.addTextChangedListener {
-            object : TextWatcher {
-                override fun afterTextChanged(s: Editable?) {
-                    viewModel.search(s.toString())
-                }
-
-                override fun beforeTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    count: Int,
-                    after: Int
-                ) {
-                }
-
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                }
-            }
-        }
         searchEditText.onItemClickListener = AdapterView.OnItemClickListener { _, _, _, _ ->
+            showLoading()
             viewModel.search(searchEditText.text.toString())
         }
     }

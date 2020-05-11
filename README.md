@@ -12,4 +12,3 @@ Android app for technical challenge
 * Room DB.
 * Kotlin.
 * LiveData.
-* Firebase.
