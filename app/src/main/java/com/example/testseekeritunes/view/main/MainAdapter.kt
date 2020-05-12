@@ -3,6 +3,7 @@ package com.example.testseekeritunes.view.main
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.ViewGroupCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.domain.model.Result
@@ -19,7 +20,7 @@ class MainAdapter(private val context: Context, private val listener: BaseOnSele
             parent,
             false
         )
-
+        ViewGroupCompat.setTransitionGroup(view as ViewGroup, true)
         val holder = MainViewHolder(view)
 
         holder.itemRoot.setOnClickListener {

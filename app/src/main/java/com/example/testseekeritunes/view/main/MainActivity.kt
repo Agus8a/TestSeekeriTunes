@@ -1,19 +1,22 @@
 package com.example.testseekeritunes.view.main
 
+import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
+import androidx.transition.TransitionManager
 import com.example.domain.model.Result
 import com.example.domain.util.OFFLINE_ERROR_TEXT
 import com.example.testseekeritunes.R
 import com.example.testseekeritunes.core.BaseActivity
 import com.example.testseekeritunes.core.BaseOnSelectItem
+import com.example.testseekeritunes.ui.Stagger
 import com.example.testseekeritunes.util.COLLECTION_PREVIEW_KEY
 import com.example.testseekeritunes.util.PREVIEW_KEY
 import com.example.testseekeritunes.util.build
+import com.example.testseekeritunes.util.toast
 import com.example.testseekeritunes.view.detail.DetailActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.search_card.*
@@ -53,11 +56,12 @@ class MainActivity : BaseActivity<MainViewStatus, MainViewModel>(), BaseOnSelect
             }
 
             viewStatus.isComplete -> {
+                TransitionManager.beginDelayedTransition(resultList, Stagger())
                 mainAdapter.setData(viewStatus.resultList)
                 hideLoading()
 
                 if (mainAdapter.itemCount == 0) {
-                    Toast.makeText(this@MainActivity, OFFLINE_ERROR_TEXT, Toast.LENGTH_SHORT).show()
+                    this@MainActivity.toast(OFFLINE_ERROR_TEXT)
                 }
 
                 viewModel.suggest()
@@ -65,8 +69,7 @@ class MainActivity : BaseActivity<MainViewStatus, MainViewModel>(), BaseOnSelect
 
             viewStatus.isError && viewStatus.errorMessage.isNotEmpty() -> {
                 hideLoading()
-                Toast.makeText(this@MainActivity, viewStatus.errorMessage, Toast.LENGTH_SHORT)
-                    .show()
+                this@MainActivity.toast(viewStatus.errorMessage)
             }
         }
     }
@@ -75,7 +78,7 @@ class MainActivity : BaseActivity<MainViewStatus, MainViewModel>(), BaseOnSelect
         val intent = Intent(this@MainActivity, DetailActivity::class.java)
         intent.putExtra(COLLECTION_PREVIEW_KEY, item.collectionViewUrl)
         intent.putExtra(PREVIEW_KEY, item.previewUrl)
-        startActivity(intent)
+        startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle())
     }
 
     private fun setUpSearchView() {
