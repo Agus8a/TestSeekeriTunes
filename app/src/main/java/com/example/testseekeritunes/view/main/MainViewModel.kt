@@ -11,8 +11,8 @@ class MainViewModel(
     private val suggestTermsUseCase: SuggestTermsUseCase,
     private val searchUseCase: SearchUseCase
 ) : BaseViewModel<MainViewStatus>() {
-    private var resultList: List<Result> = listOf()
-    private var termList: List<String> = listOf()
+    var resultList: List<Result> = listOf()
+    var termList: List<String> = listOf()
 
     override fun getInitialViewState(): MainViewStatus = MainViewStatus()
 
